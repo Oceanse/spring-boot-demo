@@ -1,0 +1,71 @@
+server:
+  port: 8081
+  #context-path: /springbootdemo
+logging:
+  config: classpath:log4j2.xml
+spring:
+  profiles:
+    active: h2
+
+---
+spring:
+  profiles: mongodb
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/mydatabase
+
+---
+spring:
+  profiles: h2
+  datasource:
+    url: jdbc:h2:mem:myh2
+    driverClassName: org.h2.Driver
+    username: ocean
+    password: 123
+    schema: classpath:db/schema.sql
+    data: classpath:db/data.sql
+  h2:
+    console:
+      enabled: true
+  jpa:
+    show_sql: false
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        hbm2ddl:
+          auto: update
+
+
+#spingboot启动时候会把此配置文件prifix=person的值绑定到Person对象中
+person:
+  height: 170
+  weight: ${person.height}
+  list:
+  - zhangsan
+  - lisi
+  map: {k1: 11,k2: 22}
+  dog:
+    name: dahuang
+    age: ${random.int}
+Rectangle:
+  length: 3
+  width: 2
+
+---
+server:
+  port: 8082
+spring:
+  profiles: dev
+
+---
+server:
+  port: 8083
+spring:
+  profiles: prod
+Rectangle:
+  length: 6
+  width: 4
+
+
+

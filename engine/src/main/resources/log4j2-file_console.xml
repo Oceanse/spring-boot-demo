@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="3">
+    <properties>
+        <property name="baseDir">logs</property>
+    </properties>
+    <Appenders>
+
+        <!--输出到console-->
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+          <!--  <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>-->   <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）,这里的level可以覆盖<Loggers>中的level-->
+            <PatternLayout>
+                <pattern>%d %p %C{1.} [%t] %m%n</pattern><!--输出日志的格式-->
+            </PatternLayout>
+        </Console>
+        <!--输出到文件-->
+        <File name="file" fileName="logs/test.log" append="false"><!--append="false", 每次运行程序会自动清空文件， true则是追加-->
+          <!--  <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>--><!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）,这里的level可以覆盖<Loggers>中的level-->
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/><!--输出日志的格式-->
+        </File>
+    </Appenders>
+
+
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="file"/>
+        </Root>
+        <!-- 过滤掉HTTP Library的一些无用的DEBUG信息 -->
+        <Logger name="org.apache.http" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+
+        <!--过滤掉mongo的一些无用的DEBUG信息 -->
+        <Logger name="org.mongodb.driver" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+
+        <!--过滤掉spring的一些无用的DEBUG信息 -->
+        <Logger name="org.springframework" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+    </Loggers>
+</Configuration>
