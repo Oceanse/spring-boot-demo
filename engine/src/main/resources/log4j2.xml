@@ -55,9 +55,26 @@
         </Logger>
 
         <!--过滤掉spring的一些无用的DEBUG信息 -->
-        <Logger name="org.springframework" level="info" additivity="false">
+        <Logger name="org.springframework" level="warn" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+
+        <!--过滤掉hibernate的一些无用的DEBUG信息 -->
+        <Logger name="org.hibernate" level="warn" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+
+        <!--过滤掉xxx的一些无用的DEBUG信息 -->
+        <Logger name="com.zaxxer.hikari" level="warn" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="RollingFile"/>
         </Logger>
     </Loggers>
+
+    <Logger name="org.slf4j.LoggerFactory" level="warn" additivity="false">
+        <AppenderRef ref="Console"/>
+        <AppenderRef ref="RollingFile"/>
+    </Logger>
 </Configuration>

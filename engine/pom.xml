@@ -25,6 +25,9 @@
             </exclusions>
         </dependency>
 
+
+
+
         <!-- Apache Log4j2 related dependencies-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -35,6 +38,16 @@
             <groupId>com.example</groupId>
             <artifactId>service</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>5.2.8.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <version>2.2.9.RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -43,7 +56,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.example.srpingdemo.Demoapplication</mainClass>
+                    <mainClass>com.example.springboot.Demoapplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

@@ -1,42 +1,15 @@
 server:
-  port: 8081
+  port: 8081  #这里的端口号会被激活的文档快prod中的port覆盖
   #context-path: /springbootdemo
 logging:
   config: classpath:log4j2.xml
 spring:
   profiles:
-    active: h2
-
----
-spring:
-  profiles: mongodb
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/mydatabase
-
----
-spring:
-  profiles: h2
-  datasource:
-    url: jdbc:h2:mem:myh2
-    driverClassName: org.h2.Driver
-    username: ocean
-    password: 123
-    schema: classpath:db/schema.sql
-    data: classpath:db/data.sql
-  h2:
-    console:
-      enabled: true
-  jpa:
-    show_sql: false
-    database-platform: org.hibernate.dialect.H2Dialect
-    properties:
-      hibernate:
-        globally_quoted_identifiers: true
-        hbm2ddl:
-          auto: update
-
-
+    active: prod #激活prod文档快，prod文档块和当前文档快互补，但功能相同时prod文档块会覆盖当前文档快
+#spingboot启动时候会把此配置文件prifix=flower的值绑定到Flower对象中
+flower:
+  name: rose
+  color: red
 #spingboot启动时候会把此配置文件prifix=person的值绑定到Person对象中
 person:
   height: 170
@@ -48,24 +21,22 @@ person:
   dog:
     name: dahuang
     age: ${random.int}
-Rectangle:
+rectangle: #这里绑定到对象的属性会被激活的文档快prod中的Rectangle覆盖
   length: 3
-  width: 2
+
 
 ---
+# (三个-)表示一个文档块
 server:
   port: 8082
 spring:
-  profiles: dev
+  profiles: dev #文档块的名字叫dev
 
 ---
+# (三个-)表示一个文档块
 server:
   port: 8083
 spring:
-  profiles: prod
-Rectangle:
+  profiles: prod #文档块的名字叫prod
+rectangle:
   length: 6
-  width: 4
-
-
-

@@ -42,7 +42,7 @@
                         <image>192.168.56.115:5000/springbootdemo:${project.version}</image>
                     </to>
                     <container>
-                        <mainClass>com.example.srpingdemo.Demoapplication</mainClass>
+                        <mainClass>com.example.springboot.Demoapplication</mainClass>
                         <ports>
                             <port>8084</port>
                         </ports>
